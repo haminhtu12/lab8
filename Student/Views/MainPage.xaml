@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Student.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Student"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="using:Student.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <vm:StudentPageViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListView Header="Classic" ItemsSource="{Binding Students}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding id}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Header="Complied" ItemsSource="{x:Bind ViewModel.Students}" Grid.Column="1"  xmlns:m="using:Student.Model">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="m:ManagerStudent">
+                    <TextBlock Text="{x:Bind name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <ListView Header="Complied" ItemsSource="{x:Bind ViewModel.Students}" Grid.Column="2"  xmlns:m="using:Student.Model">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="m:ManagerStudent">
+                    <TextBlock Text="{x:Bind gpa}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
